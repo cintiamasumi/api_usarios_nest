@@ -55,6 +55,3 @@ pids
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
-
-
-git remote add origin https://github.com/cintiamasumi/api_user.git
