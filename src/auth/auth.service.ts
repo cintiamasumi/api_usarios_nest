@@ -20,7 +20,7 @@ export class AuthService {
     async register(user: UserRegisterDto ): Promise<User> {
         const hashedPassword = await  bcrypt.hash(user.password, 10)
         const result =  await this.userRepository.findOne({where:{id: user.parentUserId},})
-        const parentUser = result ? user.parentUserId : '';
+        const parentUser = result ? user.parentUserId : null;
         const createUser = await this.userRepository.create({
             userName: user.userName ,
             password: hashedPassword ,
