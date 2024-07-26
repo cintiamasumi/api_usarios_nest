@@ -8,14 +8,13 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true
-    }), 
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot(dataSourceOptions),
     AuthModule,
     UserModule,
-    
   ],
   controllers: [],
-  providers: []
+  providers: [],
 })
 export class AppModule {}

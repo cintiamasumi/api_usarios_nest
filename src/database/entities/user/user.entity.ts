@@ -1,21 +1,23 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, IsNull } from 'typeorm';
-
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column
+} from 'typeorm'
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string
 
   @Column({ unique: true })
-  userName: string;
+  userName: string
 
   @Column()
-  password: string;
+  password: string
 
-  @Column({ nullable:true })
+  @Column({ nullable: true })
   parentUserId?: string
 
   @Column({ default: false })
-  isDeleted: boolean;
-
+  isDeleted: boolean
 }

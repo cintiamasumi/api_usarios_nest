@@ -12,14 +12,14 @@ describe('UserController (e2e)', () => {
   let token: string;
 
   beforeAll(async () => {
-    const mockRepository = mockUserRepository
+    const mockRepository = mockUserRepository;
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule]
+      imports: [AppModule],
     })
-    
-    .overrideProvider(getRepositoryToken(User))
-    .useValue( mockRepository )
-    .compile()
+
+      .overrideProvider(getRepositoryToken(User))
+      .useValue(mockRepository)
+      .compile();
 
     app = moduleFixture.createNestApplication();
     jwtService = app.get(JwtService);
@@ -34,58 +34,57 @@ describe('UserController (e2e)', () => {
   });
 
   it('/users/tree (GET)', async () => {
-        const response = await request(app.getHttpServer())
-        .get('/users/tree')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
+    const response = await request(app.getHttpServer())
+      .get('/users/tree')
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
 
-        expect(response.body).toEqual(
-            [
-                {
-                    id: 'b72add7e-5a4b-42fb-b988-4fb0a2555439',
-                    userName: 'testName',
-                    parentUserId: null,
-                    parents: [{
-                        id: 'c41aeb9b-3370-44a2-9b68-590c53210e88',
-                        userName: 'testName2',
-                        parentUserId: 'b72add7e-5a4b-42fb-b988-4fb0a2555439',
-                        parents: []
-                    }]
-                }
-            ]
-        )
-    })
+    expect(response.body).toEqual([
+      {
+        id: 'b72add7e-5a4b-42fb-b988-4fb0a2555439',
+        userName: 'testName',
+        parentUserId: null,
+        parents: [
+          {
+            id: 'c41aeb9b-3370-44a2-9b68-590c53210e88',
+            userName: 'testName2',
+            parentUserId: 'b72add7e-5a4b-42fb-b988-4fb0a2555439',
+            parents: [],
+          },
+        ],
+      },
+    ]);
+  });
 
-    it('/users/:id (GET)', async () => {
-        const id = 'b72add7e-5a4b-42fb-b988-4fb0a2555439'
-        
-        const response = await request(app.getHttpServer())
-          .get(`/users/${id}`)
-          .set('Authorization', `Bearer ${token}`)
-          .expect(200);
-    
-        expect(response.body).toEqual({
-            id: 'b72add7e-5a4b-42fb-b988-4fb0a2555439',
-            userName: 'testName',
-            parentUserId: null
-          })
-    })
+  it('/users/:id (GET)', async () => {
+    const id = 'b72add7e-5a4b-42fb-b988-4fb0a2555439';
 
-    it('/users/:id (PUT)', async () => {
-        const id = 'b72add7e-5a4b-42fb-b988-4fb0a2555439';
+    const response = await request(app.getHttpServer())
+      .get(`/users/${id}`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
 
-        const updateUserDto = {
-          userName: 'testName2',
-    parentUserId: null,
-        };
-      
-        const response = await request(app.getHttpServer())
-          .put(`/users/${id}`)
-          .set('Authorization', `Bearer ${token}`)
-          .send(updateUserDto)
-          .expect(200)
-      
-        expect(response.body).toEqual({})
-    })
-    
-})
+    expect(response.body).toEqual({
+      id: 'b72add7e-5a4b-42fb-b988-4fb0a2555439',
+      userName: 'testName',
+      parentUserId: null,
+    });
+  });
+
+  it('/users/:id (PUT)', async () => {
+    const id = 'b72add7e-5a4b-42fb-b988-4fb0a2555439';
+
+    const updateUserDto = {
+      userName: 'testName2',
+      parentUserId: null,
+    };
+
+    const response = await request(app.getHttpServer())
+      .put(`/users/${id}`)
+      .set('Authorization', `Bearer ${token}`)
+      .send(updateUserDto)
+      .expect(200);
+
+    expect(response.body).toEqual({});
+  });
+});

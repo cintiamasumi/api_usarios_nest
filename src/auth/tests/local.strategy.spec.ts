@@ -33,17 +33,17 @@ describe('LocalStrategy', () => {
     it('should return user if validation is successful', async () => {
       const user = { id: '1', userName: 'test', passWord: 'hashed' };
       jest.spyOn(authService, 'validateUser').mockResolvedValue(user);
-      
+
       const result = await strategy.validate('test', 'password');
       expect(result).toEqual(user);
     });
 
     it('should throw UnauthorizedException if validation fails', async () => {
       jest.spyOn(authService, 'validateUser').mockResolvedValue(null);
-      
-      await expect(strategy.validate('test', 'password'))
-        .rejects
-        .toThrow(UnauthorizedException);
+
+      await expect(strategy.validate('test', 'password')).rejects.toThrow(
+        UnauthorizedException,
+      );
     });
   });
 });
