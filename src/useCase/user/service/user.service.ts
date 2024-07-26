@@ -15,7 +15,9 @@ export class UserService {
 
   async getUsersTree():Promise<UserParentDto[]> {
       const users = await this.userRepository.find({ where:{ isDeleted: false } });
-      
+      if( !users) {
+        throw new Error('Users not found.')
+      }
       const result = this.buildUserTree(users)
       
       return result
