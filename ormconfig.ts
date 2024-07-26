@@ -12,6 +12,14 @@ export const dataSource = new DataSource(dataSourceOptions)
 
 dataSource.initialize()
     .then(() => {
+          
+          dataSource.query('PRAGMA busy_timeout = 60000')
+          .then(() => {
+              console.log('PRAGMA busy_timeout set to 60000');
+          })
+          .catch((err) => {
+              console.error('Error setting PRAGMA busy_timeout', err);
+          });
         console.log('Data Source initialize')
     }
     ).catch ((err) => {
