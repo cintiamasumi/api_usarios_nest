@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { User } from 'src/database/entities/user/user.entity'
 import { Repository } from 'typeorm'
@@ -44,7 +44,21 @@ export class AuthService {
   }
 
   async login(user: UserDto) {
+
+    const userLogin = await this.userRepository.findOneBy({userName: user.userName })
+
+    if(!userLogin){
+        throw new NotFoundException( `User not found`)
+    }
+
+    const isPasswordValid =  await bcrypt.compare(user.password, userLogin.password )
+
+    if(!isPasswordValid) {
+        throw new UnauthorizedException('Invalid credentials')
+    }
+
     const payload = { userName: user.userName, sub: user.id }
+    
     return {
       access_token: this.jwtService.sign(payload)
     }
