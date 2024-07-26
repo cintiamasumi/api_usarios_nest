@@ -12,7 +12,7 @@ import { AuthService } from './auth.service'
 import { Response } from 'express'
 import { JwtAuthGuard } from './jwt.auth.guard'
 import { UserLoginDto } from 'src/useCase/user/dto/user.login.dto'
-import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { UserRegisterDto } from 'src/useCase/user/dto/user.register.dto'
 
 @ApiTags('Login')
@@ -27,6 +27,8 @@ export class AuthController {
   }
   @ApiOperation({ summary: 'Realiza Login e retorna um token Jwt' })
   @Post('login')
+  @ApiResponse({ status: 404, description: 'Usuário não encontrado/Credenciais inválidas'})
+  @ApiResponse({ status: 401, description: 'Rota não autorizada' })
   async login(@Body() loginUserDto: UserLoginDto, @Res() res: Response) {
     const { access_token } = await this.authService.login(loginUserDto)
     res.cookie('jwt', access_token, { httpOnly: true })
