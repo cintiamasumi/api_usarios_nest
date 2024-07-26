@@ -2,15 +2,15 @@
 
 Este projeto é uma API de gerenciamento de usuários que permite criar, ler, atualizar e excluir usuários, além de gerenciar a hierarquia entre eles. A API é protegida por autenticação JWT.
 
-### Tecnologias utilizadas
+## Tecnologias utilizadas
 
-````
+
 - NestJS
 - TypeScript
 - SQLite
 - JWT (JSON Web Tokens)
 - Jest para testes
-````
+
 
 ### Pré-requisitos
 Certifique-se de ter o Node.js(v20.14.0) e o npm instalados. Você pode baixá-los [aqui](https://nodejs.org/).
@@ -35,6 +35,9 @@ Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
 1. Env
     ```bash
     JWT_SECRET='97daa658-01c1-47b4-a14b-fa72c3bca830'
+    
+    TOKEN_EXPIRIES='1'
+        -Informar o tempo de expiração do token em minutos
 
 ### Inicie o Servidor
 1. Rode a Migration
@@ -48,8 +51,8 @@ Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
 ### Swagger
 
   
-  A documentação da API está disponível via Swagger. Para acessar a documentação Swagger:
-  ```
+A documentação da API está disponível via Swagger. Para acessar a documentação Swagger:
+  ```bash
     http://localhost:3000/docs
   ```
 
@@ -81,7 +84,6 @@ A interface do Swagger permite que você teste os endpoints da API diretamente d
     - forneça para rota de login os dados que foi registrado na rota anterior
     - Copie o apenas o que esta depois do access_token *(O que esta em italico)*
     - exemplo
-      ```
         {
           "access_token": "*eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InN0cmluZyIsImlhdCI6MTcyMTkzODAzNiwiZXhwIjoxNzIxOTQxNjM2fQ.2uFF-y75NqkLDbMosOvRw6QemABQh84HEE-6hM3wyM8*"
         }
@@ -103,7 +105,7 @@ A interface do Swagger permite que você teste os endpoints da API diretamente d
   - [Postman Collection](./postman/api-user.postman_collection.json)
 
     É possivel utilizar também no Postman
-    Após a importação da Colletion não há necessidade de ajustar as variaveis de ambiente , já esta configurado na propria pasta da Collection
+    Após a importação da Colletion não há necessidade de ajustar as variáveis de ambiente , já esta configurado na propria pasta da Collection
 
 
 ## Testes
