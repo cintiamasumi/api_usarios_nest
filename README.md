@@ -13,17 +13,17 @@ Este projeto é uma API de gerenciamento de usuários que permite criar, ler, at
 ````
 
 ### Pré-requisitos
-Certifique-se de ter o Node.js e o npm instalados. Você pode baixá-los [aqui](https://nodejs.org/).
+Certifique-se de ter o Node.js(v20.14.0) e o npm instalados. Você pode baixá-los [aqui](https://nodejs.org/).
 
 ### Passos para Instalação
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/cintiamasumi/api_user.git
 
 2. Navegue até o diretório do projeto
     ```
-    cd seu-repositorio
+    cd api-user
     ```
 3. Instale as dependências:
     ```
@@ -34,10 +34,13 @@ Certifique-se de ter o Node.js e o npm instalados. Você pode baixá-los [aqui](
 Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
 1. Env
     ```bash
-    JWT_SECRET=seu-segredo-jwt
+    JWT_SECRET='97daa658-01c1-47b4-a14b-fa72c3bca830'
 
 ### Inicie o Servidor
-1. Inicie a aplicação
+1. Rode a Migration
+    ```bash
+      npm migration:run
+2. Inicie a aplicação
   
     ```bash
       npm run start:dev
@@ -47,7 +50,7 @@ Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
   
   A documentação da API está disponível via Swagger. Para acessar a documentação Swagger:
   ```
-    http://localhost:3000/api
+    http://localhost:3000/docs
   ```
 
 ## Endpoints
@@ -72,8 +75,10 @@ Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
 A interface do Swagger permite que você teste os endpoints da API diretamente do navegador. Aqui estão os passos básicos para usar o Swagger:
 
 1. **Criação do usuario**:
-
+    - `POST /auth/register`
 2. **Login**:
+    - `POST /auth/login`
+    - forneça para rota de login os dados que foi registrado na rota anterior
     - Copie o apenas o que esta depois do access_token *(O que esta em italico)*
     - exemplo
       ```
@@ -91,6 +96,14 @@ A interface do Swagger permite que você teste os endpoints da API diretamente d
     - Preencha os parâmetros necessários, se houver.
     - Clique no botão `Execute` para enviar a solicitação.
     - Veja a resposta no painel de resultados.
+
+## Postman
+
+  
+  - [Postman Collection](./postman/api-user.postman_collection.json)
+
+    É possivel utilizar também no Postman
+    Após a importação da Colletion não há necessidade de ajustar as variaveis de ambiente , já esta configurado na propria pasta da Collection
 
 
 ## Testes
